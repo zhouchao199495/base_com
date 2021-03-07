@@ -51,33 +51,44 @@ void TestEpoll()
 }
 
 // ²âÊÔ¶à½ø³Ì
-void TestFork()
+void TestFork(int argc, char** argv)
 {
+	for(int i=0;i<argc;i++)
+        {
+                printf("22   i=%s\n",argv[i]);
+        }
+
 	pid_t id = fork();
 	if (id < 0)
 	{
 		printf("fork error!\n");
+		return ;
 	}
-	else if (id == 0)
+	//¿¿¿¿¿¿¿¿¿¿¿¿¿
+	setsid();// set sub-process independent
+	if (id == 0)// sub process
 	{
 		execlp("mytest", NULL);
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			printf("new porcess,id=%d\n", getpid());
 		}
-		
-		exit(errno);
+		int b;
+		scanf("%d", &b);
 	}
 	else
 	{
+		while(1) {sleep(1);}
 		printf("old process,the return value is %d! myid=%d\n", id, getpid());
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
-	TestFork();
-	int a = 0;
-	scanf("%d", &a);
+	for(int i=0;i<argc;i++)
+	{
+		printf("i=%s\n",argv[i]);
+	}
+	TestFork(argc-1,argv+1);
 	return 0;
 }

@@ -1,1 +1,0 @@
-±àÒëÃüÁî£ºg++ -o test ./*.cpp -lpthread -g -O0

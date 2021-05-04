@@ -106,6 +106,10 @@ void* EpollServer::BindEpollRecv()
 				msg.fd = acceptfd;
 				msg.ip = cliaddr.sin_addr.s_addr;
 				msg.port = cliaddr.sin_port;
+
+				char buffer[40];
+ 				read(acceptfd, buffer, sizeof(buffer)-1);
+				printf("cc=%s\n",buffer);
 				ret = write(m_wfd, &msg, 14);
 				if (ret != 14)
 				{

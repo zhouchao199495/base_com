@@ -102,7 +102,7 @@ am_syspub_OBJECTS = syspub-epoll_def.$(OBJEXT) \
 	syspub-select_client.$(OBJEXT) syspub-sem_operator.$(OBJEXT) \
 	syspub-shm_operator.$(OBJEXT) syspub-thread_mutex.$(OBJEXT) \
 	syspub-thread_rw_lock.$(OBJEXT) syspub-thread_unix.$(OBJEXT) \
-	syspub-main.$(OBJEXT)
+	syspub-my_log4cpp.$(OBJEXT) syspub-main.$(OBJEXT)
 syspub_OBJECTS = $(am_syspub_OBJECTS)
 syspub_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_$(V))
@@ -207,13 +207,13 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/cpp/syspub/syspub_unix/missing aclocal-1.13
+ACLOCAL = ${SHELL} /home/com/base/syspub_unix-master/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/cpp/syspub/syspub_unix/missing autoconf
-AUTOHEADER = ${SHELL} /home/cpp/syspub/syspub_unix/missing autoheader
-AUTOMAKE = ${SHELL} /home/cpp/syspub/syspub_unix/missing automake-1.13
+AUTOCONF = ${SHELL} /home/com/base/syspub_unix-master/missing autoconf
+AUTOHEADER = ${SHELL} /home/com/base/syspub_unix-master/missing autoheader
+AUTOMAKE = ${SHELL} /home/com/base/syspub_unix-master/missing automake-1.13
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -250,7 +250,7 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/cpp/syspub/syspub_unix/missing makeinfo
+MAKEINFO = ${SHELL} /home/com/base/syspub_unix-master/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 NM = /bin/nm -B
@@ -273,10 +273,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 1.0
-abs_builddir = /home/cpp/syspub/syspub_unix
-abs_srcdir = /home/cpp/syspub/syspub_unix
-abs_top_builddir = /home/cpp/syspub/syspub_unix
-abs_top_srcdir = /home/cpp/syspub/syspub_unix
+abs_builddir = /home/com/base/syspub_unix-master
+abs_srcdir = /home/com/base/syspub_unix-master
+abs_top_builddir = /home/com/base/syspub_unix-master
+abs_top_srcdir = /home/com/base/syspub_unix-master
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -306,7 +306,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/cpp/syspub/syspub_unix/install-sh
+install_sh = ${SHELL} /home/com/base/syspub_unix-master/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -315,7 +315,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /home/com/base
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -327,9 +327,9 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-syspub_SOURCES = epoll_def.cpp epoll_def.h epoll_reader.cpp epoll_reader.h epoll_server.cpp epoll_server.h event.cpp event.h msq_operator.cpp msq_operator.h select_client.cpp select_client.h sem_operator.cpp sem_operator.h shm_operator.cpp shm_operator.h thread_mutex.cpp thread_mutex.h thread_rw_lock.cpp thread_rw_lock.h thread_unix.cpp thread_unix.h main.cpp
+syspub_SOURCES = epoll_def.cpp epoll_def.h epoll_reader.cpp epoll_reader.h epoll_server.cpp epoll_server.h event.cpp event.h msq_operator.cpp msq_operator.h select_client.cpp select_client.h sem_operator.cpp sem_operator.h shm_operator.cpp shm_operator.h thread_mutex.cpp thread_mutex.h thread_rw_lock.cpp thread_rw_lock.h thread_unix.cpp thread_unix.h my_log4cpp.cpp my_log4cpp.h main.cpp
 syspub_CPPFLAGS = -I../include -L../lib -std=c++11
-syspub_LDADD = -lpthread
+syspub_LDADD = -lpthread -llog4cpp
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -450,6 +450,7 @@ include ./$(DEPDIR)/syspub-epoll_server.Po
 include ./$(DEPDIR)/syspub-event.Po
 include ./$(DEPDIR)/syspub-main.Po
 include ./$(DEPDIR)/syspub-msq_operator.Po
+include ./$(DEPDIR)/syspub-my_log4cpp.Po
 include ./$(DEPDIR)/syspub-select_client.Po
 include ./$(DEPDIR)/syspub-sem_operator.Po
 include ./$(DEPDIR)/syspub-shm_operator.Po
@@ -631,6 +632,20 @@ syspub-thread_unix.obj: thread_unix.cpp
 #	$(AM_V_CXX)source='thread_unix.cpp' object='syspub-thread_unix.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syspub-thread_unix.obj `if test -f 'thread_unix.cpp'; then $(CYGPATH_W) 'thread_unix.cpp'; else $(CYGPATH_W) '$(srcdir)/thread_unix.cpp'; fi`
+
+syspub-my_log4cpp.o: my_log4cpp.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT syspub-my_log4cpp.o -MD -MP -MF $(DEPDIR)/syspub-my_log4cpp.Tpo -c -o syspub-my_log4cpp.o `test -f 'my_log4cpp.cpp' || echo '$(srcdir)/'`my_log4cpp.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/syspub-my_log4cpp.Tpo $(DEPDIR)/syspub-my_log4cpp.Po
+#	$(AM_V_CXX)source='my_log4cpp.cpp' object='syspub-my_log4cpp.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syspub-my_log4cpp.o `test -f 'my_log4cpp.cpp' || echo '$(srcdir)/'`my_log4cpp.cpp
+
+syspub-my_log4cpp.obj: my_log4cpp.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT syspub-my_log4cpp.obj -MD -MP -MF $(DEPDIR)/syspub-my_log4cpp.Tpo -c -o syspub-my_log4cpp.obj `if test -f 'my_log4cpp.cpp'; then $(CYGPATH_W) 'my_log4cpp.cpp'; else $(CYGPATH_W) '$(srcdir)/my_log4cpp.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/syspub-my_log4cpp.Tpo $(DEPDIR)/syspub-my_log4cpp.Po
+#	$(AM_V_CXX)source='my_log4cpp.cpp' object='syspub-my_log4cpp.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syspub-my_log4cpp.obj `if test -f 'my_log4cpp.cpp'; then $(CYGPATH_W) 'my_log4cpp.cpp'; else $(CYGPATH_W) '$(srcdir)/my_log4cpp.cpp'; fi`
 
 syspub-main.o: main.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(syspub_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT syspub-main.o -MD -MP -MF $(DEPDIR)/syspub-main.Tpo -c -o syspub-main.o `test -f 'main.cpp' || echo '$(srcdir)/'`main.cpp

@@ -81,10 +81,10 @@ void PipeReadThread::ReadPipe()
 				if (nread > 0)    //读到数据
 				{
 					cout << "ReadThread, read:" << nread << ",errno:" << errno << endl;
-
-					CDataObj dd;
-					memcpy(&dd, buf, sizeof(dd));
-					printf("dd=%d,%d,%s\n", dd.a, dd.b, dd.name);
+					printf("recv:%s\n", buf);
+					// CDataObj dd;
+					// memcpy(&dd, buf, sizeof(dd));
+					// printf("dd=%d,%d,%s\n", dd.a, dd.b, dd.name);
 
 				}
 				else if (nread < 0) //读取失败

@@ -2,6 +2,7 @@
 #include "shm_operator.h"
 #include "epoll_server.h"
 #include "epoll_reader.h"
+#include "my_log4cpp.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -68,27 +69,31 @@ void TestFork(int argc, char** argv)
 	setsid();// set sub-process independent
 	if (id == 0)// sub process
 	{
+		LOGINFO("sub process start!!" << 222);
+		LOGWARN("sub process start!!" << 333);
+		LOGERROR("sub process start!!" << 444);
+		LOGDEBUG("sub process start!!" << 555);
+		// MyLog4Cpp *mylog4cpp4= MyLog4Cpp::getInstance();
+		// mylog4cpp4->printLog("sub process start!!");
 		execlp("mytest", NULL);
 		for (int i = 0; i < 2; i++)
 		{
 			printf("new porcess,id=%d\n", getpid());
 		}
+		TestEpoll();
 		int b;
 		scanf("%d", &b);
 	}
 	else
 	{
-		while(1) {sleep(1);}
+		//while(1) {sleep(1);}
 		printf("old process,the return value is %d! myid=%d\n", id, getpid());
 	}
 }
 
 int main(int argc, char** argv)
 {
-	for(int i=0;i<argc;i++)
-	{
-		printf("i=%s\n",argv[i]);
-	}
 	TestFork(argc-1,argv+1);
+	
 	return 0;
 }

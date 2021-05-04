@@ -1,5 +1,5 @@
 #include "thread_unix.h"
-
+#include <unistd.h>
 
 void* CThread::run1()
 {

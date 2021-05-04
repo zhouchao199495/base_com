@@ -1,0 +1,4 @@
+2021/05/03 00:02:26 [ INFO] :main.cpp|TestFork|72|sub process start!!222
+2021/05/03 00:02:26 [ WARN] :main.cpp|TestFork|73|sub process start!!333
+2021/05/03 00:02:26 [ERROR] :main.cpp|TestFork|74|sub process start!!444
+2021/05/03 00:02:26 [DEBUG] :main.cpp|TestFork|75|sub process start!!555

@@ -1,0 +1,65 @@
+third_party
+
+# Visual Studio
+.vs/
+.devcontainer/
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.dat
+
+/**/out
+/**/debug
+/**/build
+/**/store
+/**/client5.0sp2.cfg
+/**/log
+/**/out
+/**/debug
+/**/build
+/**/store
+/**/client5.0sp2.cfg
+/**/log
+/**/CMakeFiles
+/**/Makefile
+/**/cmake_*
+/**/CMakeCache*
+/**/bin

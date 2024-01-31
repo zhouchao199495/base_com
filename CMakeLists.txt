@@ -29,3 +29,10 @@ AUX_SOURCE_DIRECTORY(client DIR_CLIENT)
 add_executable(${APP} ${DIR_CLIENT} ${DIR_SRCS})
 target_link_libraries(${APP} PUBLIC pthread log4cpp)
 
+# rot13
+set(APP rot13)
+AUX_SOURCE_DIRECTORY(src DIR_SRCS)
+AUX_SOURCE_DIRECTORY(rot13 DIR_ROT13)
+add_executable(${APP} ${DIR_ROT13} ${DIR_SRCS})
+target_link_libraries(${APP} PUBLIC pthread log4cpp event)
+
